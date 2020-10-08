@@ -56,7 +56,7 @@ Things you may want to cover:
 | category_id        | integer    | null: false                    |
 | postage_type_id    | integer    | null: false                    |
 | preparation_day_id | integer    | null: false                    |
-| prefecture_code_id | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
 ### Association
