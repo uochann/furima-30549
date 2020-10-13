@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :items
 
   validates :email,         presence: true,     uniqueness: { case_sensitive: :false }
-  validates :password,      presence: true,     format: { with: /\A[a-z0-9]+\z/i }
+  validates :password,      presence: true,     format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i }
   validates :nickname,       presence: true
   validates :birthday,       presence: true
   validates :first_name,     presence: true,     format: { with: /\A[ぁ-んァ-ン一-龥]/ }

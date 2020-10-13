@@ -26,48 +26,42 @@ RSpec.describe User, type: :model do
       end
 
       it 'emailに@が含まれていないと登録できないこと' do
-        @user.email = '@'
+        @user.email = 'test.test.com'
         @user.valid?
         expect(@user.errors[:email]).to include('は不正な値です')
       end
 
-      it '重複したemailが存在した時登録できない' do
+      it '重複したemailが存在する場合登録できないこと' do
         @user.save
-        another_user = FactoryBot.build(:user, email: @user.email)
+        another_user = FactoryBot.build(:user)
+        another_user.email = @user.email
         another_user.valid?
         expect(another_user.errors.full_messages).to include('Emailはすでに存在します')
       end
 
-      it 'passwordが空だと登録できないこと' do
-        @user.password = nil
-        @user.valid?
-        expect(@user.errors[:password]).to include('を入力してください')
-      end
-
       it 'passwordが半角英字のみだと登録できない' do
-        @user.password = 'a' * 5
-        @user.password_confirmation = 'a' * 5
+        @user.password = 'aiueok'
+        @user.password_confirmation = 'aiueok'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Passwordは6文字以上で入力してください')
+        expect(@user.errors.full_messages).to include('Passwordは不正な値です')
       end
 
       it 'passwordが半角数字のみでは登録できない' do
-        @user.password = '0' * 5
-        @user.password_confirmation = '0' * 5
+        @user.password = '000000'
+        @user.password_confirmation = '000000'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Passwordは6文字以上で入力してください')
+        expect(@user.errors.full_messages).to include('Passwordは不正な値です')
       end
 
       it 'passwordが6文字以下であれば登録できないこと' do
-        @user.password = '12356'
-        @user.password_confirmation = '13456'
+        @user.password = '12k56'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Password confirmationとPasswordの入力が一致しません', 'Passwordは6文字以上で入力してください')
+        expect(@user.errors[:password]).to include('は6文字以上で入力してください')
       end
 
       it 'passwordが確認用含めて二回入力されていないと登録できない' do
         @user.password = 'tanaka00'
-        @user.password_confirmation = 'tanaka01'
+        @user.password_confirmation = ''
         @user.valid?
         expect(@user.errors[:password_confirmation]).to include('とPasswordの入力が一致しません')
       end
