@@ -7,9 +7,9 @@
     <h2 class="items-sell-title">商品の情報を入力</h2>
     <%= form_with model: @item, local: true do |f| %>
 
-    <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
+
     <%= render 'shared/error_messages', model: f.object %>
-    <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
+
 
     <%# 出品画像 %>
     <div class="img-upload">
@@ -92,27 +92,6 @@
         <span>販売価格<br>(¥300〜9,999,999)</span>
         <a class="question" href="#">?</a>
       </div>
-      <script type="text/javascript">
-        function calculation() {
-          const priceEv = document.getElementById("item-price");
-          priceEv.addEventListener('input', function(){
-            let price = document.getElementById("item-price").value;
-            let tax = document.getElementById("add-tax-price");
-            let profit = document.getElementById("profit");
-            let taxCal = parseInt(price, 10) * 10 / 100;
-            let profitCal = parseInt(price, 10) - taxCal;
-            tax.innerHTML = taxCal;
-            profit.innerHTML = profitCal;
-          })
-          window.name = "";
-        }
-        window.addEventListener('load', calculation)
-        if (window.name != "reload")
-        {
-          location.reload();
-          window.name = "reload";
-        }
-      </script>
       <div>
         <div class="price-content">
           <div class="price-text">
@@ -121,6 +100,7 @@
           </div>
           <span class="sell-yen">¥</span>
           <%= f.text_field :price, class:"price-input", id:"item-price", placeholder:"例）300" %>
+          <script type="text/javascript" src="js/item.js"></script>
         </div>
         <div class="price-content">
           <span>販売手数料 (10%)</span>
