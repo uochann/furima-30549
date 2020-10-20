@@ -18,19 +18,19 @@ RSpec.describe OrderSendingDestinations, type: :model do
       it 'tokenが空では購入できない' do
         @order_sending_destination.token = nil
         @order_sending_destination.valid?
-        expect(@order_sending_destination.errors.full_messages).to include('Tokenを入力してください')
+        expect(@order_sending_destination.errors[:token]).to include("を入力してください")
       end
 
       it 'prefecture_idが空では購入できない' do
         @order_sending_destination.prefecture_id = nil
         @order_sending_destination.valid?
-        expect(@order_sending_destination.errors.full_messages).to include('Prefectureを入力してください')
+        expect(@order_sending_destination.errors[:prefecture_id]).to include("を入力してください")
       end
 
       it 'cityが空では購入できない' do
         @order_sending_destination.city = nil
         @order_sending_destination.valid?
-        expect(@order_sending_destination.errors.full_messages).to include('Cityを入力してください')
+        expect(@order_sending_destination.errors[:city]).to include("を入力してください")
       end
 
       it 'house_numberが空では購入できない' do
@@ -40,19 +40,19 @@ RSpec.describe OrderSendingDestinations, type: :model do
       end
 
       it 'building_nameが空では購入できない' do
-        @order_sending_destination.building_name = ''
+        @order_sending_destination.building_name = nil
         @order_sending_destination.valid?
         expect(@order_sending_destination.errors[:building_name]).to include('を入力してください')
       end
 
       it 'phone_numberが空では購入できない' do
-        @order_sending_destination.phone_number = ''
+        @order_sending_destination.phone_number = nil
         @order_sending_destination.valid?
         expect(@order_sending_destination.errors[:phone_number]).to include('を入力してください')
       end
 
       it 'priceが空では購入できない' do
-        @order_sending_destination.price = ''
+        @order_sending_destination.price = nil
         @order_sending_destination.valid?
         expect(@order_sending_destination.errors[:price]).to include('を入力してください')
       end
@@ -66,13 +66,13 @@ RSpec.describe OrderSendingDestinations, type: :model do
       it 'post_codeが半角のハイフンを含んだ正しい形式でないと購入できない' do
         @order_sending_destination.post_code = '1234567'
         @order_sending_destination.valid?
-        expect(@order_sending_destination.errors.full_messages).to include('Post codeは不正な値です')
+        expect(@order_sending_destination.errors[:post_code]).to include("は不正な値です")
       end
 
       it '電話番号が11桁出ないと購入できない' do
         @order_sending_destination.phone_number = '1234567891'
         @order_sending_destination.valid?
-        expect(@order_sending_destination.errors.full_messages).to include('Phone numberは不正な値です')
+        expect(@order_sending_destination.errors[:phone_number]).to include("は不正な値です")
       end
     end
   end

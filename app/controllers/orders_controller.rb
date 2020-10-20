@@ -1,10 +1,10 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!
-  before_action :move_to_index, except: [:index]
+  before_action :authenticate_user!, except: [:index, :create]
+  before_action :move_to_index, except: [:index, :create]
 
   def index
     @item = Item.find(params[:item_id])
-    @order = Order.new
+    @order_sending_destination = OrderSendingDestinations.new(order_params)
   end
 
   def create
@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
       @order_sending_destination.save
       redirect_to root_path
     else
-      redirect_to item_orders_path
+      render 'index'
     end
   end
 
