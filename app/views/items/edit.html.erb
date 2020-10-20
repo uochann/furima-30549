@@ -1,6 +1,7 @@
 <%# cssは商品出品のものを併用しています。
 app/assets/stylesheets/items/new.css %>
-
+<%# JavaScriptファイルを読み込む。app/javascript/packs/item.js %>
+<%= javascript_pack_tag 'item' %>
 <div class="items-sell-contents">
   <header class="items-sell-header">
     <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), "/" %>
@@ -88,7 +89,6 @@ app/assets/stylesheets/items/new.css %>
           </div>
           <span class="sell-yen">¥</span>
           <%= f.text_field :price, class:"price-input", id:"item-price", placeholder:"例）300" %>
-          <script type="text/javascript" src="js/item.js"></script>
         </div>
         <div class="price-content">
           <span>販売手数料 (10%)</span>
