@@ -8,7 +8,6 @@ FactoryBot.define do
     phone_number   { '08088889999' }
     token          { 'ENV["PAYJP_PUBLIC_KEY"]' }
     price          { '3000' }
-    order_id       { 1 }
 
     association :user
     association :item

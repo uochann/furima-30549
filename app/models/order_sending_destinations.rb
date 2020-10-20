@@ -7,7 +7,6 @@ class OrderSendingDestinations
     validates :prefecture_id, numericality: { other_than: 1 }
     validates :house_number
     validates :building_name
-    validates :order_id
     validates :city
     validates :token
     validates :price

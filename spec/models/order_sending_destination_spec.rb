@@ -57,12 +57,6 @@ RSpec.describe OrderSendingDestinations, type: :model do
         expect(@order_sending_destination.errors[:price]).to include('を入力してください')
       end
 
-      it 'order_idが空では購入できない' do
-        @order_sending_destination.order_id = nil
-        @order_sending_destination.valid?
-        expect(@order_sending_destination.errors[:order_id]).to include('を入力してください')
-      end
-
       it 'post_codeが半角のハイフンを含んだ正しい形式でないと購入できない' do
         @order_sending_destination.post_code = '1234567'
         @order_sending_destination.valid?
