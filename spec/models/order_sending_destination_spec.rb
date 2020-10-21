@@ -33,7 +33,7 @@ RSpec.describe OrderSendingDestinations, type: :model do
       end
 
       it 'prefectur_idが1だと登録できない' do
-        @order_sending_destination.prefecture_id = '1'
+        @order_sending_destination.prefecture_id = 1
         @order_sending_destination.valid?
         expect(@order_sending_destination.errors[:prefecture_id]).to include('は1以外の値にしてください')
       end
