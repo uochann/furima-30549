@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
 
   def index
     @order_sending_destination = OrderSendingDestinations.new
+    redirect_to root_path unless @item.order.nil?
   end
 
   def create
@@ -39,8 +40,6 @@ class OrdersController < ApplicationController
 
   def move_to_index
     @item = Item.find(params[:item_id])
-    unless @item.user_id != current_user.id
-      redirect_to root_path
-    end
+    redirect_to root_path unless @item.user_id != current_user.id
   end
 end
