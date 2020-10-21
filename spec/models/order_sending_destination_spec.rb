@@ -12,6 +12,11 @@ RSpec.describe OrderSendingDestinations, type: :model do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@order_sending_destination).to be_valid
       end
+
+      it '建物名がなくても購入できる' do
+        @order_sending_destination.building_name = nil
+        expect(@order_sending_destination).to be_valid
+      end
     end
 
     context '商品を購入できない場合' do
@@ -27,6 +32,12 @@ RSpec.describe OrderSendingDestinations, type: :model do
         expect(@order_sending_destination.errors[:prefecture_id]).to include('を入力してください')
       end
 
+      it 'prefectur_idが1だと登録できない' do
+        @order_sending_destination.prefecture_id = '1'
+        @order_sending_destination.valid?
+        expect(@order_sending_destination.errors[:prefecture_id]).to include('は1以外の値にしてください')
+      end
+
       it 'cityが空では購入できない' do
         @order_sending_destination.city = nil
         @order_sending_destination.valid?
@@ -37,12 +48,6 @@ RSpec.describe OrderSendingDestinations, type: :model do
         @order_sending_destination.house_number = nil
         @order_sending_destination.valid?
         expect(@order_sending_destination.errors[:house_number]).to include('を入力してください')
-      end
-
-      it 'building_nameが空では購入できない' do
-        @order_sending_destination.building_name = nil
-        @order_sending_destination.valid?
-        expect(@order_sending_destination.errors[:building_name]).to include('を入力してください')
       end
 
       it 'phone_numberが空では購入できない' do

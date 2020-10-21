@@ -6,7 +6,6 @@ class OrderSendingDestinations
     validates :post_code, format: { with: /\A\d{3}[-]\d{4}\z/ }
     validates :prefecture_id, numericality: { other_than: 1 }
     validates :house_number
-    validates :building_name
     validates :city
     validates :token
     validates :price
