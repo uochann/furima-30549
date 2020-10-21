@@ -66,7 +66,7 @@ Things you may want to cover:
 
 
 
-## buyer テーブル
+## order テーブル
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
@@ -90,8 +90,8 @@ Things you may want to cover:
 | house_number     | string     | null: false                    |
 | building_name    | string     |                                |
 | phone_number     | string     | unique: true,                  |
-| buyer            | references | null: false, foreign_key: true |
+| order            | references | null: false, foreign_key: true |
 
 #### Association
 
-- belongs_to :buyer
+- belongs_to :order
